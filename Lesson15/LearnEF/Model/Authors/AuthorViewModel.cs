@@ -1,0 +1,16 @@
+﻿using LearnEF.Entities;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace LearnEF.Model.Authors
+{
+    public class AuthorViewModel
+    {
+        public Guid Id { get; set; }
+        public string Name { get; set; }
+        public List<string> Books { get; set; }
+    }
+}
