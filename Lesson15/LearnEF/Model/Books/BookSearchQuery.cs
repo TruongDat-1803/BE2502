@@ -1,4 +1,4 @@
-﻿namespace LearnEF.Model.Books
+﻿namespace BookApp.Model.Books
 {
     public class BookSearchQuery : SearchQuery
     {

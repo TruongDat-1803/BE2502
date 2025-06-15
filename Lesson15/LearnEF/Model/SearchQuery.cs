@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace LearnEF.Model
+namespace BookApp.Model
 {
     public class SearchQuery
     {

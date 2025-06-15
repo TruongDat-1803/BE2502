@@ -1,9 +1,9 @@
-﻿using LearnEF.Entities;
-using LearnEF.Model;
-using LearnEF.Model.Books;
+﻿using BookApp.Entities;
+using BookApp.Model;
+using BookApp.Model.Books;
 using Microsoft.EntityFrameworkCore;
 
-namespace LearnEF.Services
+namespace BookApp.Services
 {
     public class BookService
     {

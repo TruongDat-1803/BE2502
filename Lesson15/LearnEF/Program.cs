@@ -1,7 +1,7 @@
 ﻿// See https://aka.ms/new-console-template for more information
-using LearnEF;
-using LearnEF.Model.Authors;
-using LearnEF.Services;
+using BookApp;
+using BookApp.Model.Authors;
+using BookApp.Services;
 
 Console.WriteLine("Hello, World!");
 

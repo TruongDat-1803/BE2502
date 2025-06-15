@@ -1,7 +1,12 @@
+using DemoWeb.Services;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+//builder.Services.AddTransient<IServiceA, Service>();
+//builder.Services.AddScoped<IServiceA, Service>();
+builder.Services.AddSingleton<IServiceA, Service>();
 
 var app = builder.Build();
 

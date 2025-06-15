@@ -1,13 +1,13 @@
-﻿using LearnEF.Model.Authors;
-using LearnEF.Model.Books;
-using LearnEF.Services;
+﻿using BookApp.Model.Authors;
+using BookApp.Model.Books;
+using BookApp.Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace LearnEF
+namespace BookApp
 {
     public class AuthorManager
     {

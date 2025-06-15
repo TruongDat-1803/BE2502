@@ -1,11 +1,11 @@
-﻿using LearnEF.Entities;
+﻿using BookApp.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace LearnEF.Model.Authors
+namespace BookApp.Model.Authors
 {
     public class AuthorViewModel
     {

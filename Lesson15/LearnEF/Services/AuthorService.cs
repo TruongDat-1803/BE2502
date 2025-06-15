@@ -1,10 +1,10 @@
-﻿using LearnEF.Entities;
-using LearnEF.Model.Authors;
-using LearnEF.Model.Books;
+﻿using BookApp.Entities;
+using BookApp.Model.Authors;
+using BookApp.Model.Books;
 using Microsoft.EntityFrameworkCore;
 using static System.Reflection.Metadata.BlobBuilder;
 
-namespace LearnEF.Services
+namespace BookApp.Services
 {
     public class AuthorService
     {
