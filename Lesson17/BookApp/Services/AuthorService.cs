@@ -6,21 +6,21 @@ using static System.Reflection.Metadata.BlobBuilder;
 
 namespace BookApp.Services
 {
-    public class AuthorService
+    public class AuthorService : IAuthorService
     {
         private readonly DemoDbContext _context;
         public AuthorService(DemoDbContext context)
         {
             _context = context;
         }
-        public void Create(CreateAuthorViewModel model)
+        public async Task Create(CreateAuthorViewModel model)
         {
             var author = new Author { Name = model.Name, Id = new Guid() };
-            _context.Set<Author>().Add(author); // insert Author () values()...
-            _context.SaveChanges();
+            _context.Set<Author>().Add(author); 
+            await _context.SaveChangesAsync();
         }
 
-        public void Update(UpdateAuthorViewModel model)
+        public async Task Update(UpdateAuthorViewModel model)
         {
             // select * from Authors where Id = model.Id
             var author = _context.Set<Author>().FirstOrDefault(s => s.Id == model.Id);
@@ -30,19 +30,19 @@ namespace BookApp.Services
             }
             author.Name = model.Name;
             _context.Set<Author>().Update(author);
-            _context.SaveChanges();
+            await _context.SaveChangesAsync();
         }
-        public List<AuthorViewModel> GetAll()
+        public async Task<List<AuthorViewModel>>GetAll()
         {
-            var authors = _context.Set<Author>().ToList();
-            var authorViewModels = authors.Select(s => new AuthorViewModel
-            {
-                Id = s.Id,
-                Name = s.Name,
-            }).ToList();
-            return authorViewModels;
+            var authors = _context.Authors;
+            var authorViewModels = authors.Select(s => new AuthorViewModel 
+            { 
+                Name = s.Name, 
+                Id = s.Id 
+            });
+            return await authorViewModels.ToListAsync();
         }
-        public List<AuthorViewModel> GetAll_AuthorAndBook()
+        public async Task<List<AuthorViewModel>> GetAll_AuthorAndBook()
         {
             var authors = _context.Authors.Include(a => a.Books)
                 .Select(s => new AuthorViewModel
@@ -51,8 +51,7 @@ namespace BookApp.Services
                 Name = s.Name,
                 Books = s.Books.Select(b => b.Name).ToList()
             });
-
-            return authors.ToList();
+            return await authors.ToListAsync();
         }
         public List<BookViewModel> GetAllBooks(Guid _authorID)
         {
@@ -67,7 +66,7 @@ namespace BookApp.Services
                               }).ToList();
             return books;
         }
-        public void Delete(Guid id)
+        public async Task Delete(Guid id)
         {
             // select * from Authors where Id = id
             var author = _context.Set<Author>().FirstOrDefault(s => s.Id == id);
@@ -76,18 +75,23 @@ namespace BookApp.Services
                 throw new Exception($"The author with id {id} is not found");
             }
             _context.Set<Author>().Remove(author);
-            _context.SaveChanges();
+            await _context.SaveChangesAsync();
         }
 
-        public Author GetById(Guid id)
+        public async Task<AuthorViewModel> GetById(Guid id)
         {
-            // select * from Authors where Id = id
-            var author = _context.Set<Author>().FirstOrDefault(s => s.Id == id);
+            var author = await _context.Authors.FindAsync(id);
             if (author == null)
             {
-                throw new Exception($"The author with id {id} is not found");
+                throw new Exception("Author not found");
             }
-            return author;
+
+            var result = new AuthorViewModel()
+            {
+                Id = author.Id,
+                Name = author.Name,
+            };
+            return result;
         }
     }
 }
